@@ -17,13 +17,14 @@ $MYSQL_DATABASE = getenv('MYSQL_DATABASE');
 
 // 创建连接
 // $con = new mysqli($MYSQL_HOST:$MYSQL_PORT,$MYSQL_USER,$MYSQL_PASSWORD,$MYSQL_DATABASE) or die("数据库连接失败");
-$con = new mysqli(`$MYSQL_HOST:$MYSQL_PORT`,$MYSQL_USER,$MYSQL_PASSWORD,"/run/mysqld/mysqld.sock");
+$conn = new mysqli(`$MYSQL_HOST:$MYSQL_PORT`,$MYSQL_USER,$MYSQL_PASSWORD);
 // 检测连接
-        if ($con->connect_error) {
-            die("连接失败: " . $con->connect_error);
-        }else{
-            echo "连接成功";
-        } 
+   // 检测连接
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}else{
+echo "连接成功";
+}
   }else{
     echo "没有Mysql";
   }
