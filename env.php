@@ -28,29 +28,14 @@ echo "连接成功";
    
 // 选择数据库
 
-$db_selected = mysql_select_db($MYSQL_DATABASE, $con);
-if (!$db_selected)
-{
-die ("Can\'t DB sdm163155241_db : " . mysql_error());
-}
+mysql_connect(`$MYSQL_HOST:$MYSQL_PORT`,$MYSQL_USER,$MYSQL_PASSWORD);
 
-$tabelCount = 1;
-$result = mysql_query("SHOW TABLES"); 
-if($result)
-{
-while($row = mysql_fetch_array($result)) 
-{ 
-echo $tabelCount.": ".$row[0]. "<br/>"; 
-$tabelCount++;
-} 
-}else
-{
-echo "query result is null";
-} 
+   $tables = mysql_query(`SHOW TABLES FROM $MYSQL_DATABASE`); 
 
-
-
-mysql_free_result($result); 
+   while (list($table) = mysql_fetch_row($tables)) {
+      echo "$table <br />";
+   }
+ 
    
   }else{
     echo "没有Mysql";
