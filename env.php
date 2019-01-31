@@ -25,6 +25,21 @@ if (!$conn) {
 }else{
 echo "连接成功";
 }
+   
+   mysql_select_db($MYSQL_DATABASE) or die("数据库连接失败！"); 
+
+$result = mysql_query("SHOW TABLES"); 
+
+while($row = mysql_fetch_array($result)) 
+
+{ 
+
+echo $row[0].""; 
+
+} 
+
+mysql_free_result($result);
+   
   }else{
     echo "没有Mysql";
   }
@@ -32,18 +47,3 @@ echo "连接成功";
 // foreach ($_ENV as $key => $value) {
 //   echo "{$key}: {$value}<br/>";
 // }
-$servername = "localhost:3316";
-$username = "root";
-$password = "rainbond";
-
-// 创建连接
- $con = new mysqli($servername,$username,$password, "test") or die("数据库连接失败");
- //添加操作
- $api = $_POST['code'];
-     $sql = "INSERT INTO people (name) VALUES ('{$api}')";
-if ($con->query($sql) === TRUE) {
-    echo json_encode("api".$api."插入成功");
-} else {
-    echo "Error: " . $sql . "<br>" . $con->error;
-}
-$con->close();
