@@ -26,19 +26,31 @@ if (!$conn) {
 echo "连接成功";
 }
    
-   mysql_select_db($MYSQL_DATABASE) or die("数据库连接失败！"); 
+// 选择数据库
 
-$result = mysql_query("SHOW TABLES"); 
+$db_selected = mysql_select_db($MYSQL_DATABASE, $con);
+if (!$db_selected)
+{
+die ("Can\'t DB sdm163155241_db : " . mysql_error());
+}
 
-while($row = mysql_fetch_array($result)) 
+$tabelCount = 1;
+$result = mysql_query("SHOW TABLES"); 
+if($result)
+{
+while($row = mysql_fetch_array($result)) 
+{ 
+echo $tabelCount.": ".$row[0]. "<br/>"; 
+$tabelCount++;
+} 
+}else
+{
+echo "query result is null";
+} 
 
-{ 
 
-echo $row[0].""; 
 
-} 
-
-mysql_free_result($result);
+mysql_free_result($result); 
    
   }else{
     echo "没有Mysql";
