@@ -31,12 +31,13 @@ $con = new mysqli(`$MYSQL_HOST:$MYSQL_PORT`,$MYSQL_USER,$MYSQL_PASSWORD);
 // foreach ($_ENV as $key => $value) {
 //   echo "{$key}: {$value}<br/>";
 // }
+
 $servername = "localhost:3316";
 $username = "root";
 $password = "rainbond";
 
 // 创建连接
- $con = new mysqli($servername,$username,$password, "test") or die("数据库连接失败");
+ $con = new mysqli($servername,$username,$password, "test") or die("数据库连接失败！");
  //添加操作
  $api = $_POST['code'];
      $sql = "INSERT INTO people (name) VALUES ('{$api}')";
